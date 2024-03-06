@@ -10,6 +10,7 @@ public class WindForce : MonoBehaviour
     public ForceMode2D forceMode = ForceMode2D.Force;
     public Rigidbody2D rb;
     public Transform sail;
+    public Transform body;
     public PlayerController playerController;
     private float sail_deployment = 1;
 
@@ -24,7 +25,6 @@ public class WindForce : MonoBehaviour
     {
         if (playerController != null) {
             sail_deployment = playerController.sail_deployment;
-            Debug.Log(sail_deployment);
         }
         addForceToSail();
         addDragForces();
@@ -63,9 +63,9 @@ public class WindForce : MonoBehaviour
     }
 
     void addConstantForwardForce() {
-        Vector2 velocityDirection = rb.velocity.normalized;
-
-       rb.AddForce(velocityDirection * forwardForce);
+        float angleInRadians = (body.eulerAngles.z + 90) * Mathf.Deg2Rad;
+        Vector2 forward = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
+        rb.AddForce(forward * forwardForce, ForceMode2D.Force);
     }
 
 }

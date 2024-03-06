@@ -682,11 +682,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windForceDirection: {x: 0, y: 0.1}
-  forwardForce: 0.01
+  forwardForce: 0.1
   forceMode: 0
   rb: {fileID: 1657834682}
   sail: {fileID: 76201444}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1657834684}
 --- !u!114 &1657834684
 MonoBehaviour:
   m_ObjectHideFlags: 0
