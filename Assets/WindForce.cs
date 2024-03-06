@@ -10,15 +10,22 @@ public class WindForce : MonoBehaviour
     public ForceMode2D forceMode = ForceMode2D.Force;
     public Rigidbody2D rb;
     public Transform sail;
+    public PlayerController playerController;
+    private float sail_deployment = 1;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerController != null) {
+            sail_deployment = playerController.sail_deployment;
+            Debug.Log(sail_deployment);
+        }
         addForceToSail();
         addDragForces();
         addConstantForwardForce();
@@ -46,7 +53,7 @@ public class WindForce : MonoBehaviour
             float sineOfAngle = Mathf.Abs(Mathf.Cos(angleInRadians));
 
             // Multiply the forceDirection by the sine of the angle
-            Vector2 modifiedForceDirection = windForceDirection * sineOfAngle;
+            Vector2 modifiedForceDirection = windForceDirection * sineOfAngle * sail_deployment;
 
             // Apply the force (example: applying it every frame while 'Update' runs)
             rb.AddForce(modifiedForceDirection, ForceMode2D.Force);

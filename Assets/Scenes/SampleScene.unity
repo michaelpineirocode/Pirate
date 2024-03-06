@@ -682,10 +682,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windForceDirection: {x: 0, y: 0.1}
-  forwardVelocity: 0.01
+  forwardForce: 0.01
   forceMode: 0
   rb: {fileID: 1657834682}
   sail: {fileID: 76201444}
+  playerController: {fileID: 0}
 --- !u!114 &1657834684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,6 +702,8 @@ MonoBehaviour:
   rotationSpeed: 100
   sail: {fileID: 76201444}
   boat: {fileID: 1250819871}
+  sail_deployment: 1
+  sail_deployment_speed: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
