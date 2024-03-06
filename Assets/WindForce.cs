@@ -5,25 +5,60 @@ using UnityEngine;
 public class WindForce : MonoBehaviour
 {
 
-    public Vector2 forceDirection = new Vector2(0, 10); // Force direction and magnitude
+    public Vector2 windForceDirection = new Vector2(0, 10); // Force direction and magnitude
+    public float forwardForce = 0.01f;
     public ForceMode2D forceMode = ForceMode2D.Force;
+    public Rigidbody2D rb;
+    public Transform sail;
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody component attached to this GameObject
-        if (rb != null)
-        {
-            rb.AddForce(forceDirection, forceMode); // Apply the force
-        }
-        else
-        {
-            Debug.LogError("Rigidbody component missing from this GameObject.");
-        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        addForceToSail();
+        addDragForces();
+        addConstantForwardForce();
     }
+
+    void addDragForces() {
+        //D = 1/2*fluid density*velocity^2*Area*drag coefficient.
+        int area = 6;
+        int fluid_density = 1;
+        float drag_coefficient = 0.6f;
+        float velocity = rb.velocity.magnitude;
+        float drag = 0.5f * fluid_density * (float)Mathf.Pow(velocity, 2) * area * drag_coefficient;
+        
+        Vector2 velocityDirection = rb.velocity.normalized;
+
+       rb.AddForce(-velocityDirection * drag);
+
+    }
+
+    void addForceToSail() {
+        if (rb != null) {
+            // Convert the angle from degrees to radians since Mathf.Sin expects radians
+            float angleInRadians = sail.eulerAngles.z * Mathf.Deg2Rad;
+            // Calculate the sine of the angle
+            float sineOfAngle = Mathf.Abs(Mathf.Cos(angleInRadians));
+
+            // Multiply the forceDirection by the sine of the angle
+            Vector2 modifiedForceDirection = windForceDirection * sineOfAngle;
+
+            // Apply the force (example: applying it every frame while 'Update' runs)
+            rb.AddForce(modifiedForceDirection, ForceMode2D.Force);
+        } else {
+            Debug.LogError("Rigidbody component missing from this GameObject.");
+        }
+    }
+
+    void addConstantForwardForce() {
+        Vector2 velocityDirection = rb.velocity.normalized;
+
+       rb.AddForce(velocityDirection * forwardForce);
+    }
+
 }
