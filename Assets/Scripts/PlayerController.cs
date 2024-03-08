@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 100.0f;
     public Transform sail;
     public Transform boat;
+    public Transform camera;
     public float sail_deployment;
     public float sail_deployment_speed = 0.1f;
 
@@ -48,6 +49,17 @@ public class PlayerController : MonoBehaviour
         {
             // Rotate the object counterclockwise
             sail_deployment = sail_deployment - sail_deployment_speed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            // Rotate the object counterclockwise
+            camera.Rotate(0, 0, 100.0f * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            // Rotate the object counterclockwise
+            camera.Rotate(0, 0, -100.0f * Time.deltaTime);
         }
 
     }
