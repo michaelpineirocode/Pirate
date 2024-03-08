@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WindForce : MonoBehaviour
 {
-
-    public Vector2 windForceDirection = new Vector2(0, 10); // Force direction and magnitude
     public float forwardForce = 0.01f;
     public ForceMode2D forceMode = ForceMode2D.Force;
     public Rigidbody2D rb;
@@ -13,6 +11,10 @@ public class WindForce : MonoBehaviour
     public Transform body;
     public PlayerController playerController;
     private float sail_deployment = 1;
+    public Vector2 windForceDirection; // Force direction and magnitude
+
+
+    public EnvironmentIntegrator env;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +22,14 @@ public class WindForce : MonoBehaviour
         
     }
 
+    void updateEnvProperties() {
+        windForceDirection = env.windForceDirection;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        updateEnvProperties();
         if (playerController != null) {
             sail_deployment = playerController.sail_deployment;
         }
