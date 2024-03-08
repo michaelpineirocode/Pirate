@@ -909,7 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   sail: {fileID: 76201444}
-  boat: {fileID: 1250819871}
+  boat: {fileID: 553731296}
   camera: {fileID: 519420032}
   sail_deployment: 1
   sail_deployment_speed: 0.3
