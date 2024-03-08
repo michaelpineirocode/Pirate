@@ -65,18 +65,15 @@ public class PlayerController : MonoBehaviour
         // Snaps the camera
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            // Rotate the object counterclockwise
-            Quaternion q = new Quaternion();
-            q.Set(0, 0, 0, 0);
-            camera.rotation = q;
+            float zValue = boat.rotation.eulerAngles.z;
+            camera.eulerAngles = Vector3.forward * (zValue);
         }
 
          if (Input.GetKey(KeyCode.DownArrow))
         {
             // Rotate the object counterclockwise
-            Quaternion q = new Quaternion();
-            q.Set(0, 0, 180, 0);
-            camera.rotation = q;
+            float zValue = boat.rotation.eulerAngles.z;
+            camera.eulerAngles = Vector3.forward * (zValue + 180);
         }
 
     }
