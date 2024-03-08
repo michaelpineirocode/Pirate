@@ -62,5 +62,22 @@ public class PlayerController : MonoBehaviour
             camera.Rotate(0, 0, -100.0f * Time.deltaTime);
         }
 
+        // Snaps the camera
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            // Rotate the object counterclockwise
+            Quaternion q = new Quaternion();
+            q.Set(0, 0, 0, 0);
+            camera.rotation = q;
+        }
+
+         if (Input.GetKey(KeyCode.DownArrow))
+        {
+            // Rotate the object counterclockwise
+            Quaternion q = new Quaternion();
+            q.Set(0, 0, 180, 0);
+            camera.rotation = q;
+        }
+
     }
 }
