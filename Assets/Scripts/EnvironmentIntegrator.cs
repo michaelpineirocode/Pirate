@@ -4,6 +4,8 @@ using UnityEngine;
 public class EnvironmentIntegrator : MonoBehaviour
 {
     public Vector2 windForceDirection = new Vector2(0, 10);
+    public Vector2 waveSpawnDistance = new Vector2(0, -10);
+    public float waveVelocityForce = 10.0f;
     public Transform player;
     public GameObject waveObject;
 
@@ -16,7 +18,19 @@ public class EnvironmentIntegrator : MonoBehaviour
     void instantiateWaves() {
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, windForceDirection);
         transform.rotation = rotation;
-        Instantiate(waveObject, player.position, rotation);
+        Vector2 velocityForce = windForceDirection * waveVelocityForce;
+        Vector2 location = new Vector2(player.position.x - waveSpawnDistance.x, player.position.y - waveSpawnDistance.y);
+        
+        // Instantiate the wave object and get a reference to the new instance
+        GameObject waveInstance = Instantiate(waveObject, location, rotation);
+
+        // Apply the force to the Rigidbody2D of the instantiated object, not the prefab
+        Rigidbody2D rb = waveInstance.GetComponent<Rigidbody2D>();
+        if (rb != null) {
+            rb.AddForce(velocityForce, ForceMode2D.Force);
+        } else {
+            Debug.LogError("Rigidbody2D component missing from wave object prefab.");
+        }
     }
 
     IEnumerator WaitRandomTimeCoroutine()
