@@ -7,8 +7,7 @@ public class EnemyShipAI : MonoBehaviour
     public Transform playerShip;
     public float detectionRange = 50f;
     public float attackRange = 30f;
-    public float rotationSpeed = 5f;
-    private bool isAligned = false;
+    public float rotationSpeed = 1f;
 
     // Update is called once per frame
     void Update()
@@ -24,16 +23,8 @@ public class EnemyShipAI : MonoBehaviour
     void RotateTowardsPlayer() {
         // Determine direction to the player
         Vector2 directionToPlayer = playerShip.position - transform.position;
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 180f;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transorm.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
-
-        // Check allignment
-        float angleDifference = Quaternion.Angle(transform.rotation, q);
-        if (Mathf.Abs(angleDifference) < 10) {
-            isAligned = true;
-        } else {
-            isAligned = false;
-        }
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
     }
 }
