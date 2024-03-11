@@ -5,26 +5,42 @@ using UnityEngine;
 public class EnemyShipAI : MonoBehaviour
 {
     public Transform playerShip;
-    public float detectionRange = 50f;
-    public float attackRange = 30f;
-    public float rotationSpeed = 1f;
+    public Transform boat; // The transform component that represents the ship's body, similar to the player controller setup
+    public float rotationSpeed = 2f; // How quickly the enemy ship rotates towards the player
+    public float movementSpeed = 5f; // The forward speed of the ship
 
-    // Update is called once per frame
+    private Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
-        // Calculate distance to player
-        float distanceToPlayer = Vector2.Distance(transform.position, playerShip.position);
+        RotateTowardsPlayer();
+    }
 
-        if (distanceToPlayer <= detectionRange) {
-            RotateTowardsPlayer();
+    void FixedUpdate()
+    {
+        MoveForward();
+    }
+
+    void RotateTowardsPlayer()
+    {
+        if (playerShip != null)
+        {
+            Vector2 directionToPlayer = playerShip.position - boat.position;
+            float targetAngle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90;
+            float angleStep = rotationSpeed * Time.deltaTime;
+            float angle = Mathf.MoveTowardsAngle(boat.eulerAngles.z, targetAngle, angleStep);
+            boat.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 
-    void RotateTowardsPlayer() {
-        // Determine direction to the player
-        Vector2 directionToPlayer = playerShip.position - transform.position;
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 180f;
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
+    void MoveForward()
+    {
+        // Movement is forward based on the boat's orientation
+        rb.velocity = boat.up * movementSpeed;
     }
 }
