@@ -989,7 +989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 7439253167281930868, guid: 8eec4984d81094dc0a8f632db2ef5394, type: 3}
   shootPoint: {fileID: 93746774}
-  target: {fileID: 765281109}
+  target: {fileID: 0}
   shootForce: 20
   shootRate: 2
   alignmentAngleThreshold: 10
@@ -1075,6 +1075,7 @@ GameObject:
   - component: {fileID: 403206321}
   - component: {fileID: 403206320}
   - component: {fileID: 403206319}
+  - component: {fileID: 403206322}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1149,14 +1150,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403206318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5010984, y: -0.49889922, z: 0.49889922, w: 0.5010984}
-  m_LocalPosition: {x: 0.088028446, y: 50, z: 0.032778814}
-  m_LocalScale: {x: 0.2500023, y: 0.4999903, z: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0.0000028908253, z: 0.0000028873078, w: -0.7071068}
+  m_LocalPosition: {x: 0.06710232, y: 51, z: -0.35182118}
+  m_LocalScale: {x: 0.5000143, y: 1.9999424, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1546256531}
-  m_Father: {fileID: 1121698774}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 179.748}
+--- !u!114 &403206322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403206318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d237481954fc4147b40aedf1d028d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1121698774}
+  offset: {x: 0, y: 50, z: 0}
 --- !u!1 &765281108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1395,6 @@ Transform:
   m_Children:
   - {fileID: 1731797686}
   - {fileID: 349440854}
-  - {fileID: 403206321}
   m_Father: {fileID: 1207121048}
   m_LocalEulerAnglesHint: {x: 0, y: 89.748, z: 0}
 --- !u!114 &1121698775
@@ -1396,9 +1410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 5
-  maxSpeed: 20
-  maxReverseSpeed: -100
-  turnSpeed: 100
+  maxSpeed: 10
+  maxReverseSpeed: -5
+  turnSpeed: 50
 --- !u!54 &1121698776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1817,13 +1831,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546256530}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.008535802, y: 0.008535713, z: -0.7070553, w: 0.70705533}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.061628345, y: 0.4055798, z: -0.7044161, w: 0.579228}
+  m_LocalPosition: {x: 10.01, y: 0, z: 3.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 403206321}
-  m_LocalEulerAnglesHint: {x: 1.383, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 30, y: 40, z: -90}
 --- !u!108 &1546256532
 Light:
   m_ObjectHideFlags: 0
@@ -1836,7 +1850,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2007,7 +2021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 7439253167281930868, guid: 8eec4984d81094dc0a8f632db2ef5394, type: 3}
   shootPoint: {fileID: 46161302}
-  target: {fileID: 765281109}
+  target: {fileID: 0}
   shootForce: 20
   shootRate: 2
   alignmentAngleThreshold: 10
@@ -2228,3 +2242,4 @@ SceneRoots:
   - {fileID: 1207121048}
   - {fileID: 765281109}
   - {fileID: 95565546}
+  - {fileID: 403206321}
